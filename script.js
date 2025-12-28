@@ -50,14 +50,24 @@ document.addEventListener("DOMContentLoaded", () => {
     deleteBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       todos = todos.filter(t => t !== todo);
-      li.remove();
-      saveTodos();
-      updateProgress();
+    
+      li.classList.add("hide"); // Animation starten
+    
+      setTimeout(() => {
+        li.remove(); // erst danach aus DOM entfernen
+        saveTodos();
+        updateProgress();
+      }, 300); // 300ms = Dauer der CSS-Transition
     });
 
     li.appendChild(deleteBtn);
     list.appendChild(li);
-
+        
+    // Animation starten
+    setTimeout(() => {
+      li.classList.add("show");
+    }, 10); // kleiner Delay, damit Transition greift
+    
     updateProgress();
   }
 
