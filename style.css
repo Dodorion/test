@@ -1,35 +1,36 @@
 /* Grundlayout */
 body {
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* gesamte Höhe */
-  font-family: sans-serif;
+  height: 100vh;
+  overflow: hidden; /* WICHTIG: Seite selbst scrollt nicht */
   background: #121827;
-  color: #f1f5f9;
+  font-family: sans-serif;
 }
 
 .app {
+  height: calc(100vh - 50px); /* Footer-Höhe abziehen */
+  overflow-y: auto;          /* App scrollt */
   background: #020617;
   padding: 20px;
-  border-radius: 16px;
-  width: 95%;
-  max-width: 400px;
-  margin: 20px auto;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-  flex: 1; /* füllt den verfügbaren Platz aus */
   box-sizing: border-box;
+
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 16px;
 }
 
-/* Footer als Sticky Footer */
 footer#btc-footer {
-  text-align: center;
-  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 50px;
+  width: 100%;
   background: #020617;
   color: #f1f5f9;
+  text-align: center;
+  line-height: 50px;
   box-shadow: 0 -2px 5px rgba(0,0,0,0.3);
-  margin-top: auto; /* schiebt Footer ans Ende */
-  width: 100%;
 }
 
 /* To-Do Box */
