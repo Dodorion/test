@@ -3,13 +3,16 @@
 }
 
 footer#btc-footer {
+  position: fixed;      /* Footer bleibt immer sichtbar */
+  bottom: 0;            /* ganz unten */
+  left: 0;              /* links anfangen */
+  width: 100%;          /* über gesamte Breite */
   text-align: center;
   padding: 10px;
-  background: #020617;
+  background: #020617;  /* dunkler Streifen */
   color: #f1f5f9;
-
-  /* Sticky Footer */
-  margin-top: auto;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.3); /* optional: leichter Schatten */
+  z-index: 100;         /* Footer über allen Elementen */
 }
 
 #btc-icon {
@@ -31,7 +34,8 @@ body {
 
 .app {
   background: #020617;
-  padding: 30px;
+  padding: 20px;
+  padding-bottom: 50px; /* Höhe des Footers + Abstand */
   border-radius: 12px;
   width: 100%;
   max-width: 400px;
