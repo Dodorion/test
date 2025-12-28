@@ -159,17 +159,21 @@
     Bitcoin Preis: <span id="btc-price">Lade...</span>
   </footer>
 
-  <script type="module">
-    import React from 'https://esm.sh/react';
-    import ReactDOM from 'https://esm.sh/react-dom';
+  <!-- React UMD -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+  <script>
+    const { useState, useEffect } = React;
 
     function App() {
-      const [todos, setTodos] = React.useState([]);
-      const [text, setText] = React.useState("");
+      const [todos, setTodos] = useState([]);
+      const [text, setText] = useState("");
+
       const doneCount = todos.filter(t => t.done).length;
 
-      // Bitcoin Preis laden
-      React.useEffect(() => {
+      // Bitcoin Preis
+      useEffect(() => {
         async function fetchBitcoin() {
           try {
             const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=eur');
@@ -201,46 +205,47 @@
         setTodos(newTodos);
       };
 
-      return (
-        <div className="app">
-          <div className="app-header">
-            <h1>🚀 WebDev Lern-Tracker</h1>
-
-            <div className="todo-box">
-              <input 
-                value={text} 
-                onChange={e => setText(e.target.value)} 
-                placeholder="Neues Lernziel..." 
-                onKeyPress={e => e.key === 'Enter' && addTodo()}
-              />
-              <button onClick={addTodo}>+</button>
-            </div>
-          </div>
-
-          <ul id="todoList">
-            {todos.map((todo, index) => (
-              <li 
-                key={index} 
-                className={todo.done ? "done" : ""}
-                onClick={() => toggleDone(index)}
-              >
-                {todo.text}
-                <button onClick={(e)=>{e.stopPropagation(); deleteTodo(index)}} className="delete-btn">X</button>
-              </li>
-            ))}
-          </ul>
-
-          <div className="progress-wrapper">
-            <div className="progress-container">
-              <div id="progress-bar" style={{width: todos.length ? `${(doneCount/todos.length)*100}%` : "0%"}}></div>
-            </div>
-            <p id="progress-text">{doneCount} / {todos.length} erledigt</p>
-          </div>
-        </div>
+      return React.createElement('div', { className: 'app' },
+        React.createElement('div', { className: 'app-header' },
+          React.createElement('h1', null, '🚀 WebDev Lern-Tracker'),
+          React.createElement('div', { className: 'todo-box' },
+            React.createElement('input', {
+              value: text,
+              onChange: e => setText(e.target.value),
+              placeholder: 'Neues Lernziel...',
+              onKeyPress: e => e.key === 'Enter' && addTodo()
+            }),
+            React.createElement('button', { onClick: addTodo }, '+')
+          )
+        ),
+        React.createElement('ul', { id: 'todoList' },
+          todos.map((todo, index) => 
+            React.createElement('li', {
+              key: index,
+              className: todo.done ? 'done' : '',
+              onClick: () => toggleDone(index)
+            }, 
+              todo.text,
+              React.createElement('button', {
+                className: 'delete-btn',
+                onClick: e => { e.stopPropagation(); deleteTodo(index); }
+              }, 'X')
+            )
+          )
+        ),
+        React.createElement('div', { className: 'progress-wrapper' },
+          React.createElement('div', { className: 'progress-container' },
+            React.createElement('div', { 
+              id: 'progress-bar', 
+              style: { width: todos.length ? `${(doneCount/todos.length)*100}%` : '0%' }
+            })
+          ),
+          React.createElement('p', { id: 'progress-text' }, `${doneCount} / ${todos.length} erledigt`)
+        )
       );
     }
 
-    ReactDOM.render(<App />, document.getElementById('root'));
+    ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App));
   </script>
 </body>
 </html>
