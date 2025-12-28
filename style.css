@@ -8,16 +8,13 @@ body {
   font-family: sans-serif;
 }
 
-/* APP */
 .app {
-height: calc(100vh - 80px); /* 36px Footer + etwas Luft */
+  height: calc(100vh - 72px); /* 36px Footer + 36px Progress */
   overflow-y: auto;
   padding: 20px;
-  box-sizing: border-box;
   background: #020617;
   max-width: 400px;
   margin: 0 auto;
-  border-radius: 16px;
 }
 
 footer#btc-footer {
