@@ -2,9 +2,10 @@
 body {
   margin: 0;
   height: 100vh;
-  overflow: hidden; /* WICHTIG: Seite selbst scrollt nicht */
+  overflow: hidden;
   background: #121827;
   font-family: sans-serif;
+  color: #f1f5f9; /* ← DAS FEHLTE */
 }
 
 .app {
