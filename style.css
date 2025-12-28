@@ -2,14 +2,19 @@
   box-sizing: border-box;
 }
 
-footer {
+#btc-footer {
   text-align: center;
   padding: 10px;
-  font-size: 0.9rem;
+  font-size: 1rem;
   margin-top: 20px;
   color: #f1f5f9;
 }
 
+#btc-icon {
+  font-weight: bold;
+  margin-right: 5px;
+  color: gold;
+}
 
 body {
   margin: 0;
