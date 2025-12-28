@@ -1,61 +1,41 @@
 document.addEventListener("DOMContentLoaded", () => {
-
-  const input = document.getElementById("todoInput");  
-  const progressBar = document.getElementById("progress-bar");
-  const progressText = document.getElementById("progress-text");
-
-  input.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") {
-    button.click(); // simuliere Klick auf den Hinzufügen-Button
-  }
-});
-
-function updateProgress() {
-  const total = todos.length;
-  const done = todos.filter(t => t.done).length;
-  const percent = total ? (done / total) * 100 : 0;
-
-  progressBar.style.width = percent + "%";
-  progressText.textContent = `${done} / ${total} erledigt`;
-}
-
   const input = document.getElementById("todoInput");
   const button = document.getElementById("addBtn");
   const list = document.getElementById("todoList");
 
+  const progressBar = document.getElementById("progress-bar");
+  const progressText = document.getElementById("progress-text");
+
   let todos = [];
 
-  // -------------------------
-  // Laden beim Start
-  // -------------------------
   function loadTodos() {
     const data = localStorage.getItem("todos");
     if (data) {
       todos = JSON.parse(data);
       todos.forEach(todo => createTodoElement(todo));
     }
+    updateProgress();
   }
 
-  // -------------------------
-  // Speichern
-  // -------------------------
   function saveTodos() {
     localStorage.setItem("todos", JSON.stringify(todos));
   }
 
-  // -------------------------
-  // Element erstellen
-  // -------------------------
+  function updateProgress() {
+    const total = todos.length;
+    const done = todos.filter(t => t.done).length;
+    const percent = total ? (done / total) * 100 : 0;
+
+    progressBar.style.width = percent + "%";
+    progressText.textContent = `${done} / ${total} erledigt`;
+  }
+
   function createTodoElement(todo) {
     const li = document.createElement("li");
     li.textContent = todo.text;
 
-    if (todo.done) {
-      li.classList.add("done");
-      updateProgress();
-    }
+    if (todo.done) li.classList.add("done");
 
-    // Klick = erledigt
     li.addEventListener("click", () => {
       todo.done = !todo.done;
       li.classList.toggle("done");
@@ -63,7 +43,6 @@ function updateProgress() {
       updateProgress();
     });
 
-    // Löschen
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "X";
     deleteBtn.classList.add("delete-btn");
@@ -78,28 +57,32 @@ function updateProgress() {
 
     li.appendChild(deleteBtn);
     list.appendChild(li);
+
+    updateProgress();
   }
 
-  // -------------------------
-  // Neues Todo hinzufügen
-  // -------------------------
   button.addEventListener("click", () => {
     const text = input.value.trim();
-    if (text === "") return;
+    if (!text) return;
 
-    const todo = {
-      text: text,
-      done: false
-    };
-
+    const todo = { text, done: false };
     todos.push(todo);
     createTodoElement(todo);
     saveTodos();
-    updateProgress();
 
     input.value = "";
+    input.focus(); // Fokus direkt wieder auf Input
   });
 
-  // Start
+  // Enter-Taste hinzufügen
+  input.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      button.click();
+    }
+  });
+
   loadTodos();
+
+  // ✅ Cursor direkt in Input setzen beim Laden
+  input.focus();
 });
