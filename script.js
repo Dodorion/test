@@ -45,6 +45,7 @@ function updateProgress() {
 
     if (todo.done) {
       li.classList.add("done");
+      updateProgress();
     }
 
     // Klick = erledigt
@@ -52,6 +53,7 @@ function updateProgress() {
       todo.done = !todo.done;
       li.classList.toggle("done");
       saveTodos();
+      updateProgress();
     });
 
     // Löschen
@@ -64,6 +66,7 @@ function updateProgress() {
       todos = todos.filter(t => t !== todo);
       li.remove();
       saveTodos();
+      updateProgress();
     });
 
     li.appendChild(deleteBtn);
@@ -85,6 +88,7 @@ function updateProgress() {
     todos.push(todo);
     createTodoElement(todo);
     saveTodos();
+    updateProgress();
 
     input.value = "";
   });
