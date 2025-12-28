@@ -107,23 +107,26 @@ button.delete-btn {
   cursor: pointer;
 }
 
-/* PROGRESS */
+/* PROGRESS WRAPPER */
 .progress-wrapper {
   position: fixed;
-  bottom: 50px; /* über Footer */
-  left: 0;
+  bottom: 36px; /* exakt Footer-Höhe */
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
-  background: #020617;
-  padding: 8px 20px;
+  max-width: 400px;
+  padding: 0 20px;
   box-sizing: border-box;
-  text-align: center;
+  background: #020617;
 }
 
+/* PROGRESS BAR */
 .progress-container {
   width: 100%;
   height: 8px;
   background: #1e293b;
   border-radius: 6px;
+  overflow: hidden;
 }
 
 #progress-bar {
@@ -132,6 +135,13 @@ button.delete-btn {
   background: #3b82f6;
   border-radius: 6px;
   transition: width 0.3s ease;
+}
+
+#progress-text {
+  text-align: center;
+  font-size: 0.8rem;
+  margin: 4px 0 0;
+  opacity: 0.8;
 }
 
 /* FOOTER */
