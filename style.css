@@ -33,13 +33,20 @@ body {
 }
 
 .app {
-  background: #020617;
-  padding: 20px;
-  padding-bottom: 50px; /* Höhe des Footers + Abstand */
-  border-radius: 12px;
-  width: 100%;
-  max-width: 400px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  background: #020617;                 /* dunkler Hintergrund */
+  padding: 20px 20px 70px 20px;        /* unten extra Platz für Footer */
+  border-radius: 16px;                 /* etwas größere, weichere Rundungen */
+  width: 90%;                          /* responsive Breite */
+  max-width: 400px;                    /* Limit für große Bildschirme */
+  margin: 40px auto 20px auto;         /* zentriert, oben/bottom Abstand */
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5); /* etwas intensiverer Schatten */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* für interaktive Effekte */
+}
+
+/* Optional: Hover-Effekt für subtilen 3D-Look */
+.app:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.6);
 }
 
 h1 {
