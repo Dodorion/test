@@ -3,42 +3,244 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WebDev Lern-Tracker</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>  
-  <script src="bitcoin.js" defer></script>
+  <title>WebDev Lern-Tracker React</title>
+  <style>
+    /* BODY */
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #121827;
+      color: #f1f5f9;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* APP */
+    .app {
+      max-width: 400px;
+      width: 95%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 72px); /* Footer + Progressbar */
+      background: #020617;
+      border-radius: 16px;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .app-header {
+      flex-shrink: 0;
+    }
+
+    .todo-box {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 10px 15px;
+      border-radius: 6px;
+      border: none;
+      background: #3b82f6;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    ul#todoList {
+      flex: 1;
+      overflow-y: auto;
+      margin-top: 12px;
+      padding-right: 4px;
+      padding-bottom: 80px; /* Platz für Progressbar + Footer */
+      list-style: none;
+    }
+
+    ul#todoList li {
+      background: #0f172a;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    li.done {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+
+    button.delete-btn {
+      background: crimson;
+      border: none;
+      padding: 5px 8px;
+      border-radius: 4px;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* PROGRESSBAR */
+    .progress-wrapper {
+      position: fixed;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 400px;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 10px;
+      background: #1e293b;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #3b82f6, #60a5fa);
+      border-radius: 999px;
+      transition: width 0.3s ease;
+    }
+
+    #progress-text {
+      text-align: center;
+      font-size: 0.8rem;
+      margin: 4px 0 0;
+      opacity: 0.8;
+    }
+
+    /* FOOTER */
+    footer#btc-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
+      background: #020617;
+      color: #f1f5f9;
+      box-shadow: 0 -1px 4px rgba(0,0,0,0.3);
+      font-size: 0.85rem;
+    }
+
+    @media (min-width: 600px) {
+      .app {
+        margin: 20px auto;
+      }
+    }
+  </style>
 </head>
-
 <body>
-  <div class="app">
+  <div id="root"></div>
 
-  <div class="app-header">
-    <h1>🚀 WebDev Lern-Tracker</h1>
+  <footer id="btc-footer">
+    <span id="btc-icon">₿</span>
+    Bitcoin Preis: <span id="btc-price">Lade...</span>
+  </footer>
 
-    <div class="todo-box">
-      <input id="todoInput" type="text" placeholder="Neues Lernziel...">
-      <button id="addBtn">+</button>
-    </div>
-  </div>
+  <script type="module">
+    import React from 'https://esm.sh/react';
+    import ReactDOM from 'https://esm.sh/react-dom';
 
-  <!-- NUR DIE LISTE SOLL SCROLLEN -->
-  <ul id="todoList"></ul>
+    function App() {
+      const [todos, setTodos] = React.useState([]);
+      const [text, setText] = React.useState("");
+      const doneCount = todos.filter(t => t.done).length;
 
-</div>
+      // Bitcoin Preis laden
+      React.useEffect(() => {
+        async function fetchBitcoin() {
+          try {
+            const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=eur');
+            const data = await res.json();
+            document.getElementById('btc-price').textContent = `€${data.bitcoin.eur.toLocaleString()}`;
+          } catch {
+            document.getElementById('btc-price').textContent = 'Preis nicht verfügbar';
+          }
+        }
+        fetchBitcoin();
+        const interval = setInterval(fetchBitcoin, 60000);
+        return () => clearInterval(interval);
+      }, []);
 
-<!-- Fortschritt IMMER sichtbar -->
-<div class="progress-wrapper">
-  <div class="progress-container">
-    <div id="progress-bar"></div>
-  </div>
-  <p id="progress-text">0 / 0 erledigt</p>
-</div>
+      const addTodo = () => {
+        if (!text.trim()) return;
+        setTodos([...todos, { text, done: false }]);
+        setText("");
+      };
 
-<footer id="btc-footer">
-  <span id="btc-icon">₿</span>
-  Bitcoin Preis: <span id="btc-price">Lade...</span>
-</footer>
+      const toggleDone = index => {
+        const newTodos = [...todos];
+        newTodos[index].done = !newTodos[index].done;
+        setTodos(newTodos);
+      };
 
+      const deleteTodo = index => {
+        const newTodos = todos.filter((_, i) => i !== index);
+        setTodos(newTodos);
+      };
+
+      return (
+        <div className="app">
+          <div className="app-header">
+            <h1>🚀 WebDev Lern-Tracker</h1>
+
+            <div className="todo-box">
+              <input 
+                value={text} 
+                onChange={e => setText(e.target.value)} 
+                placeholder="Neues Lernziel..." 
+                onKeyPress={e => e.key === 'Enter' && addTodo()}
+              />
+              <button onClick={addTodo}>+</button>
+            </div>
+          </div>
+
+          <ul id="todoList">
+            {todos.map((todo, index) => (
+              <li 
+                key={index} 
+                className={todo.done ? "done" : ""}
+                onClick={() => toggleDone(index)}
+              >
+                {todo.text}
+                <button onClick={(e)=>{e.stopPropagation(); deleteTodo(index)}} className="delete-btn">X</button>
+              </li>
+            ))}
+          </ul>
+
+          <div className="progress-wrapper">
+            <div className="progress-container">
+              <div id="progress-bar" style={{width: todos.length ? `${(doneCount/todos.length)*100}%` : "0%"}}></div>
+            </div>
+            <p id="progress-text">{doneCount} / {todos.length} erledigt</p>
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
 </body>
-
 </html>
