@@ -11,27 +11,29 @@
 
 <body>
   <div class="app">
+  <h1>🚀 WebDev Lern-Tracker</h1>
 
-    <h1>🚀 WebDev Lern-Tracker</h1>
+  <div class="todo-box">
+    <input id="todoInput" type="text" placeholder="Neues Lernziel...">
+    <button id="addBtn">+</button>
+  </div>
 
-    <div class="todo-box">
-      <input id="todoInput" type="text" placeholder="Neues Lernziel...">
-      <button id="addBtn">+</button>
-    </div>
+  <ul id="todoList"></ul>
+</div>
 
-    <ul id="todoList"></ul>
-      <div class="progress-container">
-        <div id="progress-bar"></div>
-      </div>
-        <p id="progress-text">0 / 0 erledigt</p>
-    </div>
-  
+<!-- Fortschritt IMMER sichtbar -->
+<div class="progress-wrapper">
+  <div class="progress-container">
+    <div id="progress-bar"></div>
+  </div>
+  <p id="progress-text">0 / 0 erledigt</p>
+</div>
+
 <footer id="btc-footer">
   <span id="btc-icon">₿</span>
   Bitcoin Preis: <span id="btc-price">Lade...</span>
 </footer>
 
 </body>
-
 
 </html>
