@@ -2,12 +2,14 @@
   box-sizing: border-box;
 }
 
-#btc-footer {
+footer#btc-footer {
   text-align: center;
   padding: 10px;
-  font-size: 1rem;
-  margin-top: 20px;
+  background: #020617;
   color: #f1f5f9;
+
+  /* Sticky Footer */
+  margin-top: auto;
 }
 
 #btc-icon {
