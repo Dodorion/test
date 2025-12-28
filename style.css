@@ -9,19 +9,14 @@ body {
   color: #f1f5f9;
 }
 
-/* App-Container */
+/* Mobile first */
 .app {
-  background: #020617;
-  padding: 20px 20px 70px 20px; /* unten Platz für Footer */
-  border-radius: 16px;
-  width: 100%;
-  min-height: calc(100vh - 50px); /* Höhe fast gesamte Seite minus Footer */
-  box-sizing: border-box;
-  margin: 0 auto 20px auto;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  width: 95%;
+  min-height: calc(100vh - 50px); /* Footer abziehen */
+  margin: 10px auto;
 }
 
-/* Desktop-Anpassung */
+/* Desktop */
 @media (min-width: 600px) {
   .app {
     max-width: 400px;
