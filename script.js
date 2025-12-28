@@ -1,5 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  const progressBar = document.getElementById("progress-bar");
+const progressText = document.getElementById("progress-text");
+
+function updateProgress() {
+  const total = todos.length;
+  const done = todos.filter(t => t.done).length;
+  const percent = total ? (done / total) * 100 : 0;
+
+  progressBar.style.width = percent + "%";
+  progressText.textContent = `${done} / ${total} erledigt`;
+}
+
   const input = document.getElementById("todoInput");
   const button = document.getElementById("addBtn");
   const list = document.getElementById("todoList");
