@@ -23,3 +23,21 @@ button {
 li {
   margin: 10px 0;
 }
+li {
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.done {
+  text-decoration: line-through;
+  color: #94a3b8;
+}
+
+.delete-btn {
+  margin-left: 10px;
+  background: crimson;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+}
