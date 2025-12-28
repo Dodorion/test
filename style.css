@@ -10,7 +10,7 @@ body {
 
 /* APP */
 .app {
-  height: calc(100vh - 120px); /* Platz für Progress + Footer */
+height: calc(100vh - 80px); /* 36px Footer + etwas Luft */
   overflow-y: auto;
   padding: 20px;
   box-sizing: border-box;
@@ -24,13 +24,14 @@ footer#btc-footer {
   position: fixed;
   bottom: 0;
   left: 0;
-  height: 50px;
   width: 100%;
+  height: 36px;                /* 🔽 deutlich kleiner */
+  line-height: 36px;           /* Text vertikal zentriert */
   background: #020617;
   color: #f1f5f9;
   text-align: center;
-  line-height: 50px;
-  box-shadow: 0 -2px 5px rgba(0,0,0,0.3);
+  font-size: 0.9rem;
+  box-shadow: 0 -1px 4px rgba(0,0,0,0.3);
 }
 
 /* To-Do Box */
