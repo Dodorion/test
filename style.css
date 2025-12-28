@@ -70,6 +70,21 @@ li {
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+  
+  /* NEU für Animation */
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+li.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+li.hide {
+  opacity: 0;
+  transform: translateY(20px);
 }
 
 li:hover {
