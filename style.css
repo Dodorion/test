@@ -18,16 +18,18 @@ body {
   padding: 20px;
   box-sizing: border-box;
 }
+
 .app-header {
   flex-shrink: 0;
 }
+
 #todoList {
-  flex: 1;                  /* nimmt Resthöhe */
+  flex: 1;
   overflow-y: auto;
   margin-top: 12px;
   padding-right: 4px;
+  padding-bottom: 80px; /* 👈 WICHTIG */
 }
-
 
 footer#btc-footer {
   position: fixed;
@@ -128,7 +130,6 @@ button.delete-btn {
   box-sizing: border-box;
 }
 
-
 .progress-container {
   width: 100%;
   height: 10px;
@@ -144,7 +145,6 @@ button.delete-btn {
   border-radius: 999px;
   transition: width 0.3s ease;
 }
-
 
 #progress-text {
   text-align: center;
