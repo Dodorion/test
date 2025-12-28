@@ -3,7 +3,7 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100vh; /* gesamte Höhe */
   font-family: sans-serif;
   background: #121827;
   color: #f1f5f9;
@@ -11,22 +11,25 @@ body {
 
 .app {
   background: #020617;
-  padding: 20px 20px 70px 20px; /* unten Platz für Footer */
+  padding: 20px;
   border-radius: 16px;
-  width: 95%;                    /* mobile first */
-  min-height: calc(100vh - 50px); /* fast volle Höhe minus Footer */
-  box-sizing: border-box;
-  margin: 10px auto;
+  width: 95%;
+  max-width: 400px;
+  margin: 20px auto;
   box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  flex: 1; /* füllt den verfügbaren Platz aus */
+  box-sizing: border-box;
 }
 
-/* Desktop-Anpassung */
-@media (min-width: 600px) {
-  .app {
-    max-width: 400px;
-    min-height: auto;
-    margin: 40px auto 20px auto;
-  }
+/* Footer als Sticky Footer */
+footer#btc-footer {
+  text-align: center;
+  padding: 10px;
+  background: #020617;
+  color: #f1f5f9;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.3);
+  margin-top: auto; /* schiebt Footer ans Ende */
+  width: 100%;
 }
 
 /* To-Do Box */
