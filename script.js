@@ -1,16 +1,31 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const input = document.getElementById("todoInput");
-  const button = document.getElementById("addBtn");
-  const list = document.getElementById("todoList");
+const input = document.getElementById("todoInput");
+const button = document.getElementById("addBtn");
+const list = document.getElementById("todoList");
 
-  button.addEventListener("click", () => {
-    const text = input.value;
-    if (text === "") return;
+button.addEventListener("click", () => {
+  const text = input.value;
+  if (text === "") return;
 
-    const li = document.createElement("li");
-    li.textContent = text;
+  // Neues Listenelement
+  const li = document.createElement("li");
+  li.textContent = text;
 
-    list.appendChild(li);
-    input.value = "";
+  // Klick = erledigt
+  li.addEventListener("click", () => {
+    li.classList.toggle("done");
   });
+
+  // Löschen-Button
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "X";
+  deleteBtn.classList.add("delete-btn");
+
+  deleteBtn.addEventListener("click", () => {
+    li.remove();
+  });
+
+  li.appendChild(deleteBtn);
+  list.appendChild(li);
+
+  input.value = "";
 });
