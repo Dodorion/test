@@ -1,7 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  const input = document.getElementById("todoInput");  
   const progressBar = document.getElementById("progress-bar");
-const progressText = document.getElementById("progress-text");
+  const progressText = document.getElementById("progress-text");
+
+  input.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    button.click(); // simuliere Klick auf den Hinzufügen-Button
+  }
+});
 
 function updateProgress() {
   const total = todos.length;
