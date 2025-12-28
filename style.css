@@ -93,3 +93,27 @@ li:hover {
 .delete-btn:hover {
   background: darkred;
 }
+
+.progress-container {
+  background: #1e293b;
+  border-radius: 6px;
+  width: 100%;
+  height: 20px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+#progress-bar {
+  background: #3b82f6;
+  height: 100%;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+#progress-text {
+  text-align: right;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  color: #cbd5f5;
+}
+
