@@ -9,13 +9,25 @@ body {
 }
 
 .app {
-  height: calc(100vh - 72px); /* 36px Footer + 36px Progress */
-  overflow-y: auto;
-  padding: 20px;
+  height: calc(100vh - 72px); /* Progress + Footer */
+  display: flex;
+  flex-direction: column;
   background: #020617;
   max-width: 400px;
   margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
 }
+.app-header {
+  flex-shrink: 0;
+}
+#todoList {
+  flex: 1;                  /* nimmt Resthöhe */
+  overflow-y: auto;
+  margin-top: 12px;
+  padding-right: 4px;
+}
+
 
 footer#btc-footer {
   position: fixed;
