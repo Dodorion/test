@@ -2,21 +2,20 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Meine erste Website</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: white;
-      text-align: center;
-      padding-top: 80px;
-    }
-    h1 { font-size: 3rem; }
-    p { font-size: 1.2rem; color: #cbd5f5; }
-  </style>
+  <title>WebDev Lern-Tracker</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Hallo 👋</h1>
-  <p>Das ist meine erste eigene Website!</p>
+
+  <h1>🚀 WebDev Lern-Tracker</h1>
+
+  <div class="todo-box">
+    <input id="todoInput" type="text" placeholder="Neues Lernziel...">
+    <button id="addBtn">Hinzufügen</button>
+  </div>
+
+  <ul id="todoList"></ul>
+
+  <script src="script.js"></script>
 </body>
 </html>
